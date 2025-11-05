@@ -25,11 +25,22 @@ def get_schema(product: str) -> str:
     Returns:
         String format of the DDL for the given product.
     """
+    # Below is not support on FastMCP Cloud
+    """
     try:
         with open(f"{product}.ddl") as f:
             return f.read()
     except Exception as e:
         return f"No schema available for {product}"
+    """
+    try:
+        s3 = boto3.client("s3")
+        response = s3.get_object(
+            Bucket=os.environ["ANALYTICS_BUCKET"], Key="schemas/retail_schema.ddl"
+        )
+        return response["Body"].read().decode("utf-8")
+    except Exception as e:
+        return f"Error getting schema for {product}. Error: {e}"
 
 
 @mcp.tool()
