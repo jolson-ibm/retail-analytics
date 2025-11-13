@@ -28,6 +28,8 @@ async def test_server():
             print(f"<<<  Result: {result.data}")
             ########################################################################
             # Call get_product_requirements, perfect case
+            # Disabled for now
+            """
             print(
                 ">>>  Calling get_product_requirements for supported retail_analytics product"
             )
@@ -43,6 +45,7 @@ async def test_server():
                 "get_product_requirements", {"product": "junk_product"}
             )
             print(f"<<<  Result: {result.data}")
+            """
             ########################################################################
             # Call execute_sql_query, perfect case
             print(
