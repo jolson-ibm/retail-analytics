@@ -25,7 +25,7 @@ def get_schema(product: str) -> str:
     Returns:
         String format of the DDL for the given product.
     """
-    # Below is not support on FastMCP Cloud
+    # Below is not supported on FastMCP Cloud
     """
     try:
         with open(f"{product}.ddl") as f:
@@ -63,6 +63,15 @@ def get_product_requirements(product: str) -> str:
 
 @mcp.tool()
 def execute_sql_query(sql_query: str):
+    """This tools will execute a valid SQL statement against the test database
+        and return the results as a csv file.
+
+    Args:
+        sql_query: A valid SQL statement for the test schema.
+
+    Returns:
+        Query results in csv fromat.
+    """
     try:
         logger.info(f"Executing sql: {sql_query}")
         boto3.setup_default_session(region_name=os.environ["AWS_REGION"])
